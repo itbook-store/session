@@ -1,5 +1,9 @@
 package com.itbook.session.controller;
 
+import com.itbook.session.ThreadLocalManager;
+import java.util.Objects;
+import java.util.Optional;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,20 +14,28 @@ import org.springframework.web.servlet.HandlerInterceptor;
 public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
-                             Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        Cookie[] cookies = request.getCookies();
+        String itbookSessionId = null;
 
-        Cookie cookie = request.getCookies()
+        if(!Objects.isNull(cookies)) {
+            for(Cookie cookie : cookies) {
+                if(cookie.getName().equals("itbook_cookie")) {
+                    itbookSessionId=cookie.getValue();
+            }
+        }}
 
-        if (itbook == null) {
+        if(Objects.isNull(itbookSessionId)) {
             response.sendRedirect("/login");
             return false;
         }
-
-        response.sendRedirect("/login/success");
+        ThreadLocalManager.setSessionId(itbookSessionId);
         return true;
     }
 
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
+                                Object handler, Exception ex) throws Exception {
+        ThreadLocalManager.removeSessionId();
+    }
 }
-
-
