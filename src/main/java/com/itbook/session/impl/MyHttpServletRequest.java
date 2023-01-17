@@ -1,5 +1,6 @@
 //package com.itbook.session.impl;
 //
+//import com.itbook.session.MyHttpSession;
 //import javax.servlet.http.HttpServletRequest;
 //import javax.servlet.http.HttpServletRequestWrapper;
 //import javax.servlet.http.HttpSession;
@@ -8,18 +9,18 @@
 // * @author 이하늬
 // * @since 1.0
 // */
-//public class CustomHttpServletRequest extends HttpServletRequestWrapper {
+//public class MyHttpServletRequest extends HttpServletRequestWrapper {
 //
 //
-//    public CustomHttpServletRequest(HttpServletRequest request) {
+//    public MyHttpServletRequest(HttpServletRequest request) {
 //        super(request);
 //    }
 //
-//    public CustomHttpSession getSession() {
+//    public MyHttpSession getSession() {
 //        return getSession(true);
 //    }
 //
-//    public CustomHttpSession getSession(boolean createNew) {
+//    public MyHttpSession getSession(boolean createNew) {
 //        // create an HttpSession implementation from Spring Session
 //        return
 //    }
