@@ -7,13 +7,15 @@
 </head>
 <body>
 <p>안녕하세요</p>
-<span th:if="${not #strings.isEmpty(itbook_cookie)}"
-      th:text="|cookie value: ${itbook_cookie}|"></span>
-<span th:if="${not #strings.isEmpty(itbook_session)}"
-      th:text="|session value: ${itbook_session}|"></span>
+<p th:if="${not #strings.isEmpty(itbook_session)}"
+      th:text="|itbook_session value: ${itbook_session}|"></p>
+<p th:if="${not #strings.isEmpty(username)}"
+      th:text="|username value: ${username}|"></p>
 
-<span th:if="${#strings.isEmpty(itbook_session)}">
-        <a th:href="@{/login}"> 로그인 </a>
+<span th:if="${not #strings.isEmpty(itbook_session)}">
+        <form method="post" action="/logout">
+    <input type="submit" value="로그아웃" />
+</form>
 </span>
 
 </body>

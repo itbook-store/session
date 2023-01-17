@@ -29,15 +29,24 @@ public class LoginController {
     private final RedisTemplate<String, String> redisTemplate;
     private final String username_itbook = "itbook";
     private final String pwd_itbook = "1234";
-    private MyHttpSession myHttpSession;
+    private final MyHttpSession myHttpSession;
 
 
     @GetMapping("/login")
-    public String getLoginForm(@SessionAttribute(value = "itbook_session", required = false) String itbook_session) {
-        if(!Objects.isNull(itbook_session)) {
+    public String getLoginForm() {
+        if(!Objects.isNull(myHttpSession.getAttribute("id"))) {
             return "redirect:/";
         }
         return "view/loginForm";
+    }
+
+    @PostMapping("/logout")
+    public String doLogout(HttpServletResponse response) {
+        myHttpSession.invalidate();
+        Cookie cookie = new Cookie("itbook_cookie", null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return "redirect:/";
     }
 
 

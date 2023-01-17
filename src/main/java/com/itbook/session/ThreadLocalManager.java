@@ -11,7 +11,7 @@ public class ThreadLocalManager {
         THREAD_LOCAL.set(sessionId);
     }
 
-    public static String getSessionId()  {
+    public static String getSessionId() {
         return THREAD_LOCAL.get();
     }
 

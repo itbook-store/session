@@ -38,7 +38,6 @@ public class RedisConfig implements BeanClassLoaderAware {
         return new LettuceConnectionFactory(configuration);
     }
 
-    @SuppressWarnings("java:S1452") // 레디스의 key value의 타입을 자유롭게 지정하기 위함.
     @Bean
     public RedisTemplate<?, ?> redisTemplate() {
         RedisTemplate<byte[], byte[]> redisTemplate = new RedisTemplate<>();
