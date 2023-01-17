@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<p>안녕하세요</p>
+<span th:if="${not #strings.isEmpty(itbook_cookie)}"
+      th:text="|cookie value: ${itbook_cookie}|"></span>
+<span th:if="${not #strings.isEmpty(itbook_session)}"
+      th:text="|session value: ${itbook_session}|"></span>
+
+<span th:if="${#strings.isEmpty(itbook_session)}">
+        <a th:href="@{/login}"> 로그인 </a>
+</span>
+
+</body>
+</html>
