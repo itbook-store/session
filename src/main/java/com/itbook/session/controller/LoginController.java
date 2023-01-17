@@ -1,5 +1,6 @@
 package com.itbook.session.controller;
 
+import java.util.Objects;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,8 +36,16 @@ public class LoginController {
     }
 
     @GetMapping
-    public String getIndex(@CookieValue(value = "username", required = false) String username) {
-        log.info("{}", username);
+    public String getIndex(HttpServletRequest request) {
+        /*HttpSession session = request.getSession(false);
+
+        String loginItbook = (String) session.getAttribute("loginItbook");
+
+        System.out.println(">>>>> " + session.getAttribute("loginItbook") + " >>>>> ");
+        if(Objects.nonNull(loginItbook)) {
+            return "redirect:/login/success";
+        }*/
+
         return "index";
     }
 
@@ -46,13 +55,22 @@ public class LoginController {
                           HttpServletResponse response) {
 
         if (username.equals(username_itbook) && pwd.equals(pwd_itbook)) {
-            HttpSession session = request.getSession(false);
+
+            Cookie cookie = new Cookie("itbook", String.valueOf(username_itbook));
+            response.addCookie(cookie);
+
+/*            HttpSession session = request.getSession(false);
             Cookie cookie = new Cookie("itbook-cookie", session.getId());
             response.addCookie(cookie);
             redisTemplate.opsForHash().put(session.getId(), "username", username);
-            session.setAttribute(session.getId(), username);
+            session.setAttribute(session.getId(), username);*/
         }
-        return null;
+        return "redirect:/";
+    }
+
+    @GetMapping("/login/success")
+    public String successLogin() {
+        return "login_success";
     }
 
 }
