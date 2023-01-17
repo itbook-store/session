@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +30,8 @@ public class LoginController {
     private final RedisTemplate<String, String> redisTemplate;
     private final String username_itbook = "itbook";
     private final String pwd_itbook = "1234";
-    private MyHttpSession myHttpSession;
+    @Qualifier("mysqlMyHttpSessionImpl")
+    private final MyHttpSession myHttpSession;
 
 
     @GetMapping("/login")
@@ -44,7 +46,7 @@ public class LoginController {
     @GetMapping("/")
     public String getIndex(Model model) {
         String itbook_session = myHttpSession.getId();
-        String  id = (String) myHttpSession.getAttribute("id");
+        String id = (String) myHttpSession.getAttribute("id");
         if (!Objects.isNull(itbook_session)) {
             model.addAttribute("itbook_session", itbook_session);
             model.addAttribute("username", id);
@@ -68,6 +70,7 @@ public class LoginController {
     private void doLoginProcess(String id, HttpServletResponse response) {
 
         String sessionId = UUID.randomUUID().toString();
+
         Cookie cookie = new Cookie("itbook_cookie", sessionId);
         ThreadLocalManager.setSessionId(sessionId);
         myHttpSession.setAttribute("id", id);

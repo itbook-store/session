@@ -4,9 +4,9 @@ import com.itbook.session.ThreadLocalManager;
 import java.util.Objects;
 import java.util.Optional;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 

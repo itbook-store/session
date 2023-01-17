@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
  * @since 1.0
  */
 @Component
-@RequiredArgsConstructor
 public class RedisMyHttpSessionImpl implements MyHttpSession, Serializable {
 
     private long creationTime;

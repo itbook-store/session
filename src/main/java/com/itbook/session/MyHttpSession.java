@@ -15,11 +15,11 @@ public interface MyHttpSession {
 
     int getMaxInactiveInterval(); // 세션의 유효시간을 초 단위로 반환 합니다. 기본값은 30초 입니다.
 
-    Object getAttribute(String var1); //get attribute
+    Object getAttribute(String key); //get attribute
 
-    void setAttribute(String var1, Object var2); //attribute 설정
+    void setAttribute(String key, Object value); //attribute 설정
 
-    void removeAttribute(String var1); //attribte 삭제
+    void removeAttribute(String key); //attribte 삭제
 
     void invalidate(); //현재 세션을 종료. 세션관련 모든 값 삭제
 
